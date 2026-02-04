@@ -1,5 +1,7 @@
 const pool = require("../db/connection");
 
+
+// get shop product by item id.
 async function getProductiD(id) {
     try {
         const product = await pool.query(`SELECT * FROM products WHERE id = $1`,
@@ -10,6 +12,7 @@ async function getProductiD(id) {
     }
 };
 
+// Add new product to the shop.
 async function createProduct(productInfo) {
     const {name, price, stock_count} = productInfo;
     
@@ -25,6 +28,8 @@ async function createProduct(productInfo) {
     }
 };
 
+
+// Update product details.
 async function updateProduct(id, productInfo) {
     const {name, price, stock_count} = productInfo;
     
@@ -38,6 +43,7 @@ async function updateProduct(id, productInfo) {
     }
 };
 
+// Delete product from the store.
 async function deleteProduct(id) {
     try {
         const result = await pool.query(`DELETE FROM products WHERE id = $1 RETURNING *`,

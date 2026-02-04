@@ -1,5 +1,6 @@
 const pool = require('../db/connection.js')
 
+// get user order history.
 async function getOrders(useriD) {
     try {
         const result = await pool.query(
@@ -13,6 +14,7 @@ async function getOrders(useriD) {
     }
 };
 
+// get user orders by id.
 async function getOrderByiD(orderiD, useriD) {
     try {
         const orderResult = await pool.query(
@@ -26,7 +28,7 @@ async function getOrderByiD(orderiD, useriD) {
         
         const order = orderResult.rows[0];
         
-        // Get order items
+        
         const itemsResult = await pool.query(
             `SELECT 
                 order_items.*,
@@ -48,6 +50,8 @@ async function getOrderByiD(orderiD, useriD) {
     }
 };
 
+
+// Create user order from cart.
 async function createOrder(useriD, cartData, paymentDetails) {
     const client = await pool.connect();
     

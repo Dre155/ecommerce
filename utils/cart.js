@@ -1,5 +1,8 @@
 const pool = require('../db/connection.js')
 
+
+// Check items in user cart.
+
 async function cartItems(useriD) {
     try {
         const itemsInCart = await pool.query(
@@ -41,6 +44,7 @@ async function cartItems(useriD) {
     }
 }
 
+// add items to user cart.
 async function addToCart(useriD, productiD, quantity) {
     try {
         const existingCart = await pool.query(
@@ -72,6 +76,8 @@ async function addToCart(useriD, productiD, quantity) {
     }
 }
 
+
+// update cart item quantity.
 async function updateCartItem(useriD, cartiD, quantity) {
     try {
         const result = await pool.query(
@@ -88,6 +94,8 @@ async function updateCartItem(useriD, cartiD, quantity) {
     }
 }
 
+
+// remove user item from cart.
 async function removeFromCart(useriD, cartiD) {
     try {
         const result = await pool.query(
@@ -103,6 +111,7 @@ async function removeFromCart(useriD, cartiD) {
     }
 }
 
+// Clear user cart.
 async function clearCart(useriD) {
     try {
         const result = await pool.query(

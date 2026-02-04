@@ -2,6 +2,7 @@ const pool = require('../db/connection.js')
 
 pool.connect()
 
+// get each user by id.
 async function getUseriD(id) {
     try {
         const useriD = await pool.query(`SELECT id, username, email, created_at, isAdmin FROM users WHERE id = $1`, [id]);
@@ -12,6 +13,8 @@ async function getUseriD(id) {
     } 
 };
 
+
+// create/register new user. 
 async function createUser(userInfo) {
     try {
         const {username, email, password_hash} = userInfo;
@@ -26,6 +29,7 @@ async function createUser(userInfo) {
     }
 };
 
+// update user account detials.
 async function updateUser(id, userInfo) {
     try {
         const {username, email} = userInfo;
@@ -41,6 +45,7 @@ async function updateUser(id, userInfo) {
     }
 };
 
+// delete user.
 async function deleteUser(id) {
     try {
         const result = await pool.query(`DELETE FROM users WHERE id = $1 RETURNING id, username, email`, [id])
@@ -51,6 +56,7 @@ async function deleteUser(id) {
     }
 };
 
+// retrieve user by email.
 async function getUserByEmail(email) {
     try {
         const userEmail = await pool.query(`SELECT * FROM users WHERE email = $1`, [email]);
